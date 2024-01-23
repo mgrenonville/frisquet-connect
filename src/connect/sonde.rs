@@ -102,9 +102,9 @@ pub fn send_init(
         0x80, // to
         config.association_id()?,
         req_id,
-        130,
-        65,
-        &ExternalTemperatureInitReply { data: vec![] },
+        1,
+        67,
+        &ExternalTemperatureInitMsg { data: vec![0, 0] },
     )?;
 
     loop {
@@ -128,7 +128,7 @@ pub fn send_init(
 pub fn send_temperature(
     rf: &mut Box<dyn RFClient>,
     config: &mut config::Frisquet,
-    temperature: i16,
+    temperature: f32,
 ) -> Result<(Metadata, SetExternalTemperatureReplyMsg), ConnectError> {
     rf.set_network_id(Vec::from(config.network_id()?))?;
 
@@ -144,7 +144,7 @@ pub fn send_temperature(
         03,
         &SetExternalTemperatureMsg {
             data: [156, 84, 0, 4, 160, 41, 0, 1, 2],
-            temperature,
+            temperature: (temperature * 10.0) as i16,
         },
     )?;
 

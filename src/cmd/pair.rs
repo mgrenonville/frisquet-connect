@@ -30,7 +30,7 @@ pub fn run(
                 network_id: Some(ass.network_id),
                 association_id: Some(ass.association_id),
                 request_id: Some(ass.request_id),
-                send_init: false,
+                send_init: Some(false),
             })
         }
         Entity::Sonde => {
@@ -38,7 +38,7 @@ pub fn run(
                 network_id: Some(ass.network_id),
                 association_id: Some(ass.association_id),
                 request_id: Some(ass.request_id),
-                send_init: true,
+                send_init: Some(true),
             })
         }
         Entity::Satellite_Z1 => (),
