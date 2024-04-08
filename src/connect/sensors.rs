@@ -1,6 +1,7 @@
 use colored::Colorize;
 use deku::prelude::*;
 use hex;
+use serde::Serialize;
 use std::fmt;
 use std::time::Duration;
 
@@ -10,7 +11,7 @@ use crate::rf::RFClient;
 
 use super::Assert;
 
-#[derive(Debug, PartialEq, DekuRead, DekuWrite)]
+#[derive(Debug, PartialEq, DekuRead, DekuWrite, Serialize)]
 #[deku(endian = "big")]
 pub struct SensorsMsg {
     len: u8,

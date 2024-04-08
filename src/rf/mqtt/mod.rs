@@ -11,7 +11,7 @@ use crate::rf::{RFClient, RecvError, RecvTimeoutError, SendError};
 pub mod messages;
 
 pub struct MqttClient {
-    client: mqtt::Client,
+    pub client: mqtt::Client,
     rx: Receiver<Option<Message>>,
     cmd_topic: String,
 }

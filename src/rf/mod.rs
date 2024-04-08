@@ -17,15 +17,15 @@ pub trait RFClient {
 }
 
 pub fn new(config: &config::Config) -> Result<Box<dyn RFClient>, String> {
-    match &config.mqtt {
-        Some(config) => return Ok(Box::new(mqtt::new(&config)?)),
-        None => {}
-    }
     match &config.serial {
         Some(config) => {
             println!("frisquet-connect on serial");
             return Ok(Box::new(serial::new(&config)?));
         }
+        None => {}
+    }
+    match &config.mqtt {
+        Some(config) => return Ok(Box::new(mqtt::new(&config)?)),
         None => {}
     }
     Err("no client configured".to_string())
@@ -72,6 +72,7 @@ impl From<RecvError> for RecvTimeoutError {
         RecvTimeoutError::Error { msg: err.msg }
     }
 }
+
 impl From<String> for RecvTimeoutError {
     fn from(err: String) -> RecvTimeoutError {
         RecvTimeoutError::Error { msg: err }
