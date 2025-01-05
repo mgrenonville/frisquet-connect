@@ -6,10 +6,10 @@ use crate::rf::RFClient;
 
 pub mod area1;
 pub mod data1;
-pub mod data2;
 pub mod data3;
 pub mod data4;
 pub mod date;
+pub mod gas;
 pub mod pair;
 pub mod promiscuous;
 pub mod run;
@@ -47,8 +47,8 @@ enum Commands {
     Sensors,
     /// get data1 - not decoded
     Data1,
-    /// get data2 - not decoded
-    Data2,
+    /// get gas sensor
+    Gas,
     /// get data3 - not decoded
     Data3,
     /// get data4 - not decoded
@@ -94,7 +94,7 @@ impl Cli {
             Some(Commands::Promiscuous) => promiscuous::run(rf, config),
             Some(Commands::Area1) => area1::run(rf, config),
             Some(Commands::Data1) => data1::run(rf, config),
-            Some(Commands::Data2) => data2::run(rf, config),
+            Some(Commands::Gas) => gas::run(rf, config),
             Some(Commands::Data3) => data3::run(rf, config),
             Some(Commands::Data4) => data4::run(rf, config),
             Some(Commands::Sonde { temp }) => sonde::run(rf, temp, config),

@@ -11,5 +11,10 @@ struct ReportingError {
 }
 
 pub trait ReportingClient {
-    fn forward<T: Serialize>(&mut self, metadata: Metadata, data: T) -> Result<(), Box<dyn Error>>;
+    fn forward<T: Serialize>(
+        &mut self,
+        metadata: Metadata,
+        topic: &str,
+        data: T,
+    ) -> Result<(), Box<dyn Error>>;
 }
